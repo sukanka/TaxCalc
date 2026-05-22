@@ -291,12 +291,14 @@ stores/
 
 ### 8.2 inputStore 结构
 
+金额字段在 store 中以 `string` 形式存储（便于 localStorage 序列化和精度保留），在 `core/` 计算层入口转为 `Decimal` 实例参与运算，结果再转回 `string` 写入 `resultStore`。
+
 ```typescript
 {
-  monthlySalary: Decimal,
-  monthlyBonus: Decimal,
-  customSocialBase: Decimal | null,
-  customHousingFundBase: Decimal | null,
+  monthlySalary: string,            // Decimal 金额字符串
+  monthlyBonus: string,
+  customSocialBase: string | null,
+  customHousingFundBase: string | null,
   housingFundRatio: number,
   deductions: {
     childEducation: { enabled, count },
@@ -308,7 +310,7 @@ stores/
     elderlyCare: { enabled, isOnlyChild, sharedAmount },
   },
   reliefs: string[],
-  annualBonus: Decimal,
+  annualBonus: string,
   bonusStrategy: 'auto' | 'merge' | 'separate' | 'split',
 }
 ```
