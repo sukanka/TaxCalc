@@ -153,7 +153,7 @@ applyRelief(
 ```
 
 三种 mode 的实现：
-- `ratio`：`reduced = min(taxAmount × ratio, annualCap − accumulated)`
+- `ratio`：`reduced = taxAmount × ratio`，若 `annualCap` 存在则再取 `min(reduced, annualCap − accumulated)`
 - `cap`：`reduced = min(taxAmount, annualCap − accumulated)`
 - `monthly_cap`：`reduced = min(taxAmount, monthlyCap)`，每月独立结算
 
@@ -197,14 +197,14 @@ interface CityConfig {
 
 | 城市 | 模式 | 比例 | 限额 | 原文链接 |
 |---|---|---|---|---|
-| 北京 | ratio | 50% | 待补 | [北京税务局通知](http://beijing.chinatax.gov.cn/bjswj/c105384/202207/7eb27639aea5468194ab7fd90d799043.shtml) |
+| 北京 | ratio | 50% | 无限额 | [北京税务局通知](http://beijing.chinatax.gov.cn/bjswj/c105384/202207/7eb27639aea5468194ab7fd90d799043.shtml) |
 | 上海 | cap | — | 10,500 元/年 | [上海税务局通知](https://shanghai.chinatax.gov.cn/zcfw/zcfgk/grsds/202601/t478928.html) |
 | 广州 | ratio | 90% | 90,000 元/年 | [广东省税务局公告](https://guangdong.chinatax.gov.cn/gdsw/ssfggds/2022-03/03/content_2cae6ba9eac44d5cbf93d09a73aa890a.shtml) |
 | 深圳 | ratio | 90% | 90,000 元/年 | 同广州（沿用广东省统一政策） |
 | 杭州 | monthly_cap | — | 500 元/月 | [浙江税务局通知](https://zhejiang.chinatax.gov.cn/art/2023/2/8/art_25980_1144.html) |
 | 成都 | cap | — | 12,000 元/年 | [四川政策链接](https://dzsgxjscyy.sczwfw.gov.cn/art/2025/2/21/art_44457_280795.html?areaCode=511771000000) |
 
-注：北京减征上限和成都减征比例需在实现阶段访问原文核实并补全。
+注：`ratio` 模式中 `annualCap` 为可选字段，北京政策不设限额时该字段省略。
 
 ### 6.3 UI 联动
 
