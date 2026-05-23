@@ -4,8 +4,8 @@ import {
   MONTHLY_BONUS_BRACKETS,
   findBracket,
 } from '@/data/taxBrackets';
-import { MONTHLY_BASIC_DEDUCTION } from '@/data/constants';
-import type { TaxComputation, TaxBracket, MonthlyWithholding } from '@/types';
+import { MONTHLY_BASIC_DEDUCTION, BONUS_TRAP_RANGES } from '@/data/constants';
+import type { TaxComputation, TaxBracket, MonthlyWithholding, TrapWarning } from '@/types';
 
 /**
  * 综合所得税额计算（公式：应纳税所得额 × 税率 − 速算扣除数）。
@@ -90,4 +90,23 @@ export function computeMonthlyWithholding(input: MonthlyWithholdingInput): Month
     netSalary,
     bracket,
   };
+}
+
+export function detectBonusTrap(bonusAmount: string | number): TrapWarning | null {
+  const amount = d(bonusAmount).toNumber();
+  for (const range of BONUS_TRAP_RANGES) {
+    if (amount >= range.rangeStart && amount < range.rangeEnd) {
+      const taxAtAmount = computeBonusSeparateTax(amount);
+      const taxAtTrigger = computeBonusSeparateTax(range.trigger);
+      const saving = d(taxAtAmount.taxBeforeRelief).sub(taxAtTrigger.taxBeforeRelief);
+      return {
+        triggerAmount: range.trigger,
+        suggestedAmount: range.trigger,
+        potentialSaving: fmt(saving),
+        rangeStart: range.rangeStart,
+        rangeEnd: range.rangeEnd,
+      };
+    }
+  }
+  return null;
 }
