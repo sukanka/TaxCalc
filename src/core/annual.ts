@@ -28,7 +28,12 @@ export interface AnnualSummaryInput {
 
 export interface AnnualSummary {
   monthly: MonthlyWithholding[];
+  /** 仅工资部分（保持向后兼容） */
   annualGross: string;
+  /** 年终奖税前金额 */
+  annualBonusGross: string;
+  /** 工资 + 年终奖 */
+  annualTotalGross: string;
   annualSocialInsurance: string;
   annualDeductions: string;
   annualReliefDeducted: string;
@@ -165,11 +170,15 @@ export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
   const totalReliefDeducted = cumRelief.add(bonusComparison.best.reliefReduced ?? '0');
   const annualTotalTax = d(annualSalaryTax).add(annualBonusTax);
 
-  const annualNet = annualGross.sub(annualSI).sub(annualTotalTax);
+  const bonusGross = max(d(input.annualBonus), ZERO);
+  const totalGross = annualGross.add(bonusGross);
+  const annualNet = totalGross.sub(annualSI).sub(annualTotalTax);
 
   return {
     monthly,
     annualGross: fmt(annualGross),
+    annualBonusGross: fmt(bonusGross),
+    annualTotalGross: fmt(totalGross),
     annualSocialInsurance: fmt(annualSI),
     annualDeductions: fmt(annualDed),
     annualReliefDeducted: fmt(totalReliefDeducted),

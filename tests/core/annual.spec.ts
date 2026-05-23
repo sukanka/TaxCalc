@@ -114,7 +114,7 @@ describe('computeAnnualSummary', () => {
     expect(parseFloat(r.annualBonusTax)).toBe(0);
   });
 
-  it('annualNet = annualGross − 五险一金 − annualTotalTax', () => {
+  it('annualNet = annualTotalGross − 五险一金 − annualTotalTax', () => {
     const r = computeAnnualSummary({
       monthlyIncome: '30000',
       annualBonus: '60000',
@@ -124,8 +124,27 @@ describe('computeAnnualSummary', () => {
       reliefs: [],
     });
     const expected =
-      parseFloat(r.annualGross) - parseFloat(r.annualSocialInsurance) - parseFloat(r.annualTotalTax);
+      parseFloat(r.annualTotalGross) -
+      parseFloat(r.annualSocialInsurance) -
+      parseFloat(r.annualTotalTax);
     expect(parseFloat(r.annualNetIncome)).toBeCloseTo(expected, 2);
+  });
+
+  it('annualTotalGross = annualGross + annualBonusGross', () => {
+    const r = computeAnnualSummary({
+      monthlyIncome: '30000',
+      annualBonus: '60000',
+      city: beijing,
+      housingFundRatio: 0.12,
+      deductions: noDeductions,
+      reliefs: [],
+    });
+    expect(parseFloat(r.annualTotalGross)).toBeCloseTo(
+      parseFloat(r.annualGross) + parseFloat(r.annualBonusGross),
+      2
+    );
+    expect(parseFloat(r.annualGross)).toBeCloseTo(360000, 2); // 30000×12
+    expect(parseFloat(r.annualBonusGross)).toBeCloseTo(60000, 2);
   });
 
   it('年终奖也享受减征：北京 50% + 月薪 30000 + 年终奖 60000', () => {

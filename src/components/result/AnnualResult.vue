@@ -17,29 +17,41 @@ const bonusStrategyLabel = computed(() => {
 <template>
   <div v-if="summary" class="space-y-16px">
     <section class="card">
-      <p class="text-11px text-mute uppercase tracking-wide">全年综合所得 (工资 + 年终奖)</p>
-      <div class="flex items-baseline gap-16px mt-6px">
+      <p class="text-11px text-mute uppercase tracking-wide">全年综合所得（工资 + 年终奖）</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-16px mt-12px">
         <div>
-          <p class="text-11px text-mute">税前总收入</p>
-          <h2 class="text-28px font-bold text-ink tracking-tight">
+          <p class="text-11px text-mute">工资收入</p>
+          <h3 class="text-20px font-bold text-ink mt-4px tracking-tight">
             ¥<AnimatedNumber :value="summary.annualGross" />
-          </h2>
-        </div>
-        <div>
-          <p class="text-11px text-mute">五险一金合计</p>
-          <h3 class="text-18px font-semibold text-mute">
-            ¥<AnimatedNumber :value="summary.annualSocialInsurance" />
           </h3>
         </div>
         <div>
-          <p class="text-11px text-mute">年度净到手（仅工资部分）</p>
-          <h3 class="text-18px font-semibold text-success">
+          <p class="text-11px text-mute">年终奖</p>
+          <h3 class="text-20px font-bold text-ink mt-4px tracking-tight">
+            ¥<AnimatedNumber :value="summary.annualBonusGross" />
+          </h3>
+        </div>
+        <div>
+          <p class="text-11px text-mute">税前总收入</p>
+          <h2 class="text-22px font-bold text-primary mt-4px tracking-tight">
+            ¥<AnimatedNumber :value="summary.annualTotalGross" />
+          </h2>
+        </div>
+        <div>
+          <p class="text-11px text-mute">年度净到手</p>
+          <h3 class="text-22px font-bold text-success mt-4px tracking-tight">
             ¥<AnimatedNumber :value="summary.annualNetIncome" />
           </h3>
         </div>
       </div>
-      <div v-if="parseFloat(summary.annualReliefDeducted) > 0" class="mt-12px text-12px text-success">
-        ✓ 已减征：¥{{ summary.annualReliefDeducted }}
+
+      <div class="mt-12px flex flex-wrap gap-12px text-12px text-mute">
+        <span>五险一金 −¥{{ summary.annualSocialInsurance }}</span>
+        <span>个税 −¥{{ summary.annualTotalTax }}</span>
+        <span v-if="parseFloat(summary.annualReliefDeducted) > 0" class="text-success">
+          ✓ 已减征 ¥{{ summary.annualReliefDeducted }}
+        </span>
       </div>
     </section>
 
