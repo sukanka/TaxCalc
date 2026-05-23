@@ -9,6 +9,8 @@
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "outDir": ".tsbuild/node",
+    "tsBuildInfoFile": ".tsbuild/node/tsconfig.node.tsbuildinfo",
     "types": ["node"]
   },
   "include": ["vite.config.ts", "vitest.config.ts", "uno.config.ts"]
