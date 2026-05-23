@@ -29,8 +29,8 @@ export const hangzhou: CityConfig = {
     unemployment: { rate: 0.005 },
   },
   housingFund: {
-    baseLower: 2280,
-    baseUpper: 39687,
+    baseLower: 2490,
+    baseUpper: 40694,
     ratioRange: [0.05, 0.12],
     defaultRatio: 0.12,
   },
@@ -39,8 +39,8 @@ export const hangzhou: CityConfig = {
     url: 'http://hrss.zj.gov.cn/',
   },
   housingFundSource: {
-    title: '杭州住房公积金管理中心（待核实）',
-    url: 'https://gjj.hangzhou.gov.cn/',
+    title: '杭州住房公积金管理中心 · 2025 年度缴存基数上下限（40694/2490 元，市区）',
+    url: 'https://hz.bendibao.com/live/2025730/165668.shtm',
   },
   reliefPolicies: [
     zjBase('zhejiang-disability', 'disability', '浙江省残疾人个税每月减免最高 500 元'),

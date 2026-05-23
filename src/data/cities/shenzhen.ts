@@ -14,7 +14,7 @@ export const shenzhen: CityConfig = {
   },
   housingFund: {
     baseLower: 2360,
-    baseUpper: 41497,
+    baseUpper: 44265,
     ratioRange: [0.05, 0.12],
     defaultRatio: 0.12,
   },
@@ -23,7 +23,7 @@ export const shenzhen: CityConfig = {
     url: 'http://hrss.sz.gov.cn/',
   },
   housingFundSource: {
-    title: '深圳住房公积金管理中心（待核实）',
-    url: 'http://szgjj.sz.gov.cn/',
+    title: '深圳住房公积金管理中心 · 2025 年度缴存基数（44265/2360 元，周期 2025-07~2026-06）',
+    url: 'http://bsy.sz.bendibao.com/bsyDetail/636403.html',
   },
 };

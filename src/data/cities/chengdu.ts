@@ -29,8 +29,8 @@ export const chengdu: CityConfig = {
     unemployment: { rate: 0.004 },
   },
   housingFund: {
-    baseLower: 2200,
-    baseUpper: 27786,
+    baseLower: 2100,
+    baseUpper: 31378,
     ratioRange: [0.05, 0.12],
     defaultRatio: 0.12,
   },
@@ -39,8 +39,8 @@ export const chengdu: CityConfig = {
     url: 'http://cdhrss.chengdu.gov.cn/',
   },
   housingFundSource: {
-    title: '成都住房公积金管理中心（待核实）',
-    url: 'http://gjj.chengdu.gov.cn/',
+    title: '成都住房公积金管理中心 · 2025 年度缴存基数（31378/2100 元，中心城区）',
+    url: 'https://cd.bendibao.com/live/202577/199527.shtm',
   },
   reliefPolicies: [
     scBase('sichuan-disability', 'disability', '四川省残疾人个税年度减免上限 12,000 元'),

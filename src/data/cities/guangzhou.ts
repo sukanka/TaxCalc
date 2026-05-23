@@ -30,8 +30,8 @@ export const guangzhou: CityConfig = {
     unemployment: { rate: 0.002 },
   },
   housingFund: {
-    baseLower: 2300,
-    baseUpper: 41497,
+    baseLower: 2500,
+    baseUpper: 39828,
     ratioRange: [0.05, 0.12],
     defaultRatio: 0.12,
   },
@@ -40,8 +40,8 @@ export const guangzhou: CityConfig = {
     url: 'http://hrss.gz.gov.cn/',
   },
   housingFundSource: {
-    title: '广州住房公积金管理中心（待核实）',
-    url: 'http://gjj.gz.gov.cn/',
+    title: '广州住房公积金管理中心 · 2025 年度缴存基数调整通告（39828/2500 元）',
+    url: 'https://gjj.gz.gov.cn/gg/tzgg/content/post_10338393.html',
   },
   reliefPolicies: [
     gdBase('guangdong-disability', 'disability', '广东省残疾人个税减征 90%，年度限额 90,000 元'),

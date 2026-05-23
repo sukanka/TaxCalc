@@ -28,7 +28,7 @@ export const shanghai: CityConfig = {
   },
   housingFund: {
     baseLower: 2690,
-    baseUpper: 36921,
+    baseUpper: 37302,
     ratioRange: [0.05, 0.07],
     defaultRatio: 0.07,
   },
@@ -37,8 +37,8 @@ export const shanghai: CityConfig = {
     url: 'https://rsj.sh.gov.cn/',
   },
   housingFundSource: {
-    title: '上海住房公积金管理中心（待核实）',
-    url: 'https://www.shgjj.com/',
+    title: '上海市公积金管理中心 · 2025 年度缴存基数上下限通知（37302/2690 元）',
+    url: 'https://www.shzfgjj.cn/html/newxxgk/zcwj/gfxwj/228051.html',
   },
   reliefPolicies: [
     shanghaiBase('shanghai-disability', 'disability', '残疾'),
