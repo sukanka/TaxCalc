@@ -23,7 +23,7 @@ export const chengdu: CityConfig = {
   effectiveYear: 2026,
   socialInsurance: {
     baseLower: 4511,
-    baseUpper: 22555,
+    baseUpper: 31378,
     pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.004 },
@@ -35,7 +35,7 @@ export const chengdu: CityConfig = {
     defaultRatio: 0.12,
   },
   socialInsuranceSource: {
-    title: '成都市 2024 年社保缴费基数',
+    title: '成都市 2025 年度社会保险缴费基数（上限 31378 元，与公积金同源）',
     url: 'http://cdhrss.chengdu.gov.cn/',
   },
   housingFundSource: {

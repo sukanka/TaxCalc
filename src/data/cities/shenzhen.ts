@@ -7,7 +7,7 @@ export const shenzhen: CityConfig = {
   name: '深圳',
   socialInsurance: {
     baseLower: 2360,
-    baseUpper: 28770,
+    baseUpper: 44265,
     pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.003 },
@@ -19,7 +19,7 @@ export const shenzhen: CityConfig = {
     defaultRatio: 0.12,
   },
   socialInsuranceSource: {
-    title: '深圳市 2024 年社会保险缴费基数',
+    title: '深圳市 2025 年度社会保险缴费基数（上限 44265 元，与公积金同源）',
     url: 'http://hrss.sz.gov.cn/',
   },
   housingFundSource: {

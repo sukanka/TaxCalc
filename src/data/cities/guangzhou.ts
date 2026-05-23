@@ -24,7 +24,7 @@ export const guangzhou: CityConfig = {
   effectiveYear: 2026,
   socialInsurance: {
     baseLower: 4492,
-    baseUpper: 28770,
+    baseUpper: 39828,
     pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.002 },
@@ -36,7 +36,7 @@ export const guangzhou: CityConfig = {
     defaultRatio: 0.12,
   },
   socialInsuranceSource: {
-    title: '广州市 2024 年社会保险缴费基数',
+    title: '广州市 2025 年度社会保险缴费基数（上限 39828 元，与公积金同源）',
     url: 'http://hrss.gz.gov.cn/',
   },
   housingFundSource: {

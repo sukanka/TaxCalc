@@ -21,7 +21,7 @@ export const shanghai: CityConfig = {
   effectiveYear: 2026,
   socialInsurance: {
     baseLower: 7384,
-    baseUpper: 36921,
+    baseUpper: 37302,
     pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.005 },
@@ -33,7 +33,7 @@ export const shanghai: CityConfig = {
     defaultRatio: 0.07,
   },
   socialInsuranceSource: {
-    title: '上海市 2024 年度社会保险缴费基数',
+    title: '上海市 2025 年度社会保险缴费基数（上限 37302 元，与公积金同源）',
     url: 'https://rsj.sh.gov.cn/',
   },
   housingFundSource: {

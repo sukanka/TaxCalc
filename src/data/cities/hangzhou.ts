@@ -23,7 +23,7 @@ export const hangzhou: CityConfig = {
   effectiveYear: 2026,
   socialInsurance: {
     baseLower: 4812,
-    baseUpper: 24930,
+    baseUpper: 40694,
     pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.005 },
@@ -35,7 +35,7 @@ export const hangzhou: CityConfig = {
     defaultRatio: 0.12,
   },
   socialInsuranceSource: {
-    title: '杭州市 2024 年社保缴费基数',
+    title: '杭州市 2025 年度社会保险缴费基数（上限 40694 元，与公积金同源）',
     url: 'http://hrss.zj.gov.cn/',
   },
   housingFundSource: {

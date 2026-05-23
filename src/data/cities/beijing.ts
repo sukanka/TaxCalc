@@ -36,7 +36,7 @@ export const beijing: CityConfig = {
   effectiveYear: 2026,
   socialInsurance: {
     baseLower: 6821,
-    baseUpper: 35283,
+    baseUpper: 35811,
     pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.005 },
@@ -48,7 +48,7 @@ export const beijing: CityConfig = {
     defaultRatio: 0.12,
   },
   socialInsuranceSource: {
-    title: '北京市 2024 年度社会保险缴费工资基数',
+    title: '北京市 2025 年度社会保险缴费工资基数（上限 35811 元，与公积金同源）',
     url: 'https://rsj.beijing.gov.cn/',
   },
   housingFundSource: {
