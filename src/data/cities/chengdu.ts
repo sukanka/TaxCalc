@@ -38,6 +38,10 @@ export const chengdu: CityConfig = {
     title: '成都市 2024 年社保缴费基数',
     url: 'http://cdhrss.chengdu.gov.cn/',
   },
+  housingFundSource: {
+    title: '成都住房公积金管理中心（待核实）',
+    url: 'http://gjj.chengdu.gov.cn/',
+  },
   reliefPolicies: [
     scBase('sichuan-disability', 'disability', '四川省残疾人个税年度减免上限 12,000 元'),
     scBase('sichuan-elderly-alone', 'elderly_alone', '四川省孤老人员个税年度减免上限 12,000 元'),

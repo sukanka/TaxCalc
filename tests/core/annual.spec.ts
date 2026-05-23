@@ -8,6 +8,7 @@ const beijing: CityConfig = {
   region: 'beijing',
   effectiveYear: 2026,
   socialInsuranceSource: { title: 't', url: 'http://x' },
+  housingFundSource: { title: 't', url: 'http://x' },
   socialInsurance: {
     baseLower: 6000,
     baseUpper: 36000,

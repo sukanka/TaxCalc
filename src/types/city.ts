@@ -37,6 +37,8 @@ export interface CityConfig {
   reliefPolicies: ReliefPolicy[];
   /** 数据基准年度，例：2026 */
   effectiveYear: number;
-  /** 政策来源链接（社保公积金基数） */
+  /** 社保基数政策来源 */
   socialInsuranceSource: { title: string; url: string };
+  /** 公积金基数政策来源 */
+  housingFundSource: { title: string; url: string };
 }

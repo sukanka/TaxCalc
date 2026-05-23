@@ -42,14 +42,18 @@ export const beijing: CityConfig = {
     unemployment: { rate: 0.005 },
   },
   housingFund: {
-    baseLower: 2420,
-    baseUpper: 35283,
+    baseLower: 2540,
+    baseUpper: 35811,
     ratioRange: [0.05, 0.12],
     defaultRatio: 0.12,
   },
   socialInsuranceSource: {
     title: '北京市 2024 年度社会保险缴费工资基数',
     url: 'https://rsj.beijing.gov.cn/',
+  },
+  housingFundSource: {
+    title: '北京住房公积金管理中心 · 2025 住房公积金年度政策解读（缴存基数 2540-35811 元）',
+    url: 'https://gjj.beijing.gov.cn/web/zwgk61/2024zcjd/743765478/index.html',
   },
   reliefPolicies: [beijingDisability, beijingElderlyAlone, beijingMartyrFamily],
 };

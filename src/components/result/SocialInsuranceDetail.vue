@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useResultStore } from '@/stores/resultStore';
+import { useSettingsStore } from '@/stores/settingsStore';
+import { CITIES } from '@/data/cities';
 
 const result = useResultStore();
+const settings = useSettingsStore();
 const si = computed(() => result.summary?.socialInsurance);
+const city = computed(() => CITIES[settings.cityId]);
 
 const fmtPercent = (r: number) => `${(r * 100).toFixed(1)}%`;
 </script>
@@ -52,6 +56,21 @@ const fmtPercent = (r: number) => `${(r * 100).toFixed(1)}%`;
       <span v-if="!si.socialBaseCapped && !si.housingFundBaseCapped" class="text-11px text-mute">
         基数未触发上限
       </span>
+    </div>
+
+    <div v-if="city" class="mt-12px pt-12px border-t border-stone-100 text-11px text-mute space-y-4px">
+      <div class="flex items-center justify-between gap-8px">
+        <span>社保基数政策来源</span>
+        <a :href="city.socialInsuranceSource.url" target="_blank" rel="noopener" class="text-primary hover:underline truncate max-w-60% text-right">
+          {{ city.socialInsuranceSource.title }} ↗
+        </a>
+      </div>
+      <div class="flex items-center justify-between gap-8px">
+        <span>公积金基数政策来源</span>
+        <a :href="city.housingFundSource.url" target="_blank" rel="noopener" class="text-primary hover:underline truncate max-w-60% text-right">
+          {{ city.housingFundSource.title }} ↗
+        </a>
+      </div>
     </div>
   </section>
 </template>

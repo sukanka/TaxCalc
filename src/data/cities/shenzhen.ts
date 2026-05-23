@@ -22,4 +22,8 @@ export const shenzhen: CityConfig = {
     title: '深圳市 2024 年社会保险缴费基数',
     url: 'http://hrss.sz.gov.cn/',
   },
+  housingFundSource: {
+    title: '深圳住房公积金管理中心（待核实）',
+    url: 'http://szgjj.sz.gov.cn/',
+  },
 };

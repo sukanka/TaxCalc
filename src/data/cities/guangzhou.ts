@@ -39,6 +39,10 @@ export const guangzhou: CityConfig = {
     title: '广州市 2024 年社会保险缴费基数',
     url: 'http://hrss.gz.gov.cn/',
   },
+  housingFundSource: {
+    title: '广州住房公积金管理中心（待核实）',
+    url: 'http://gjj.gz.gov.cn/',
+  },
   reliefPolicies: [
     gdBase('guangdong-disability', 'disability', '广东省残疾人个税减征 90%，年度限额 90,000 元'),
     gdBase('guangdong-elderly-alone', 'elderly_alone', '广东省孤老人员个税减征 90%，年度限额 90,000 元'),

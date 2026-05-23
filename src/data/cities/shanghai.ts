@@ -36,6 +36,10 @@ export const shanghai: CityConfig = {
     title: '上海市 2024 年度社会保险缴费基数',
     url: 'https://rsj.sh.gov.cn/',
   },
+  housingFundSource: {
+    title: '上海住房公积金管理中心（待核实）',
+    url: 'https://www.shgjj.com/',
+  },
   reliefPolicies: [
     shanghaiBase('shanghai-disability', 'disability', '残疾'),
     shanghaiBase('shanghai-elderly-alone', 'elderly_alone', '孤老'),

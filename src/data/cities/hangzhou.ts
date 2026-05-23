@@ -38,6 +38,10 @@ export const hangzhou: CityConfig = {
     title: '杭州市 2024 年社保缴费基数',
     url: 'http://hrss.zj.gov.cn/',
   },
+  housingFundSource: {
+    title: '杭州住房公积金管理中心（待核实）',
+    url: 'https://gjj.hangzhou.gov.cn/',
+  },
   reliefPolicies: [
     zjBase('zhejiang-disability', 'disability', '浙江省残疾人个税每月减免最高 500 元'),
     zjBase('zhejiang-elderly-alone', 'elderly_alone', '浙江省孤老人员个税每月减免最高 500 元'),

@@ -8,6 +8,7 @@ const fakeCity: CityConfig = {
   region: 'beijing',
   effectiveYear: 2026,
   socialInsuranceSource: { title: 'test', url: 'http://example.com' },
+  housingFundSource: { title: 'test', url: 'http://example.com' },
   socialInsurance: {
     baseLower: 6000,
     baseUpper: 36000,
