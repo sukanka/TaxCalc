@@ -79,4 +79,55 @@ describe('computeSocialInsurance', () => {
     });
     expect(r.housingFund).toBe('1200.00');
   });
+
+  it('养老保险比例可调：传入 0.10 → 用 0.10 计算', () => {
+    const r = computeSocialInsurance({
+      monthlyIncome: '20000',
+      city: fakeCity,
+      housingFundRatio: 0.12,
+      pensionRatio: 0.10,
+    });
+    expect(r.pension).toBe('2000.00');
+    expect(r.details.pension.rate).toBe(0.10);
+  });
+
+  it('未传 pensionRatio 时用城市配置默认值', () => {
+    const r = computeSocialInsurance({
+      monthlyIncome: '20000',
+      city: fakeCity,
+      housingFundRatio: 0.12,
+    });
+    expect(r.details.pension.rate).toBe(0.08);
+  });
+
+  it('返回 details 含每项比例', () => {
+    const r = computeSocialInsurance({
+      monthlyIncome: '20000',
+      city: fakeCity,
+      housingFundRatio: 0.12,
+    });
+    expect(r.details.medical.rate).toBe(0.02);
+    expect(r.details.unemployment.rate).toBe(0.005);
+    expect(r.details.housingFund.rate).toBe(0.12);
+  });
+
+  it('社保基数封顶时 socialBaseCapped=true', () => {
+    const r = computeSocialInsurance({
+      monthlyIncome: '50000',
+      city: fakeCity,
+      housingFundRatio: 0.12,
+    });
+    expect(r.socialBaseCapped).toBe(true);
+    expect(r.housingFundBaseCapped).toBe(true);
+  });
+
+  it('在区间内时 capped=false', () => {
+    const r = computeSocialInsurance({
+      monthlyIncome: '20000',
+      city: fakeCity,
+      housingFundRatio: 0.12,
+    });
+    expect(r.socialBaseCapped).toBe(false);
+    expect(r.housingFundBaseCapped).toBe(false);
+  });
 });

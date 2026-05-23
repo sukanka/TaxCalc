@@ -21,6 +21,7 @@ export const useResultStore = defineStore('result', {
         annualBonus: input.annualBonus,
         city,
         housingFundRatio: settings.housingFundRatio,
+        pensionRatio: settings.pensionRatio,
         customSocialBase: input.customSocialBase,
         customHousingFundBase: input.customHousingFundBase,
         deductions: input.deductions,

@@ -37,7 +37,7 @@ export const beijing: CityConfig = {
   socialInsurance: {
     baseLower: 6821,
     baseUpper: 35283,
-    pension: { rate: 0.08 },
+    pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.005 },
   },

@@ -5,6 +5,7 @@ import { computeMonthlyDeductions } from './deductions';
 import { applyReliefBatch } from './reliefs';
 import { compareBonusPlans } from './bonusOptimizer';
 import { ANNUAL_BASIC_DEDUCTION } from '@/data/constants';
+import type { SocialInsuranceResult } from './socialInsurance';
 import type {
   CityConfig,
   DeductionsInput,
@@ -17,6 +18,7 @@ export interface AnnualSummaryInput {
   annualBonus: string;
   city: CityConfig;
   housingFundRatio: number;
+  pensionRatio?: number;
   customSocialBase?: string | null;
   customHousingFundBase?: string | null;
   deductions: DeductionsInput;
@@ -33,6 +35,7 @@ export interface AnnualSummary {
   annualSalaryTax: string;
   annualNetIncome: string;
   bonusComparison: BonusComparison;
+  socialInsurance: SocialInsuranceResult;
 }
 
 export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
@@ -42,6 +45,7 @@ export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
     customHousingFundBase: input.customHousingFundBase,
     city: input.city,
     housingFundRatio: input.housingFundRatio,
+    pensionRatio: input.pensionRatio,
   });
   const monthlyDed = computeMonthlyDeductions(input.deductions);
 
@@ -126,5 +130,6 @@ export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
     annualSalaryTax: fmt(annualSalaryTax),
     annualNetIncome: fmt(annualNet),
     bonusComparison,
+    socialInsurance: si,
   };
 }

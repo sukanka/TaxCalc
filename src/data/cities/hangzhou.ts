@@ -24,7 +24,7 @@ export const hangzhou: CityConfig = {
   socialInsurance: {
     baseLower: 4812,
     baseUpper: 24930,
-    pension: { rate: 0.08 },
+    pension: { rate: 0.08, ratioRange: [0, 0.12] },
     medical: { rate: 0.02 },
     unemployment: { rate: 0.005 },
   },

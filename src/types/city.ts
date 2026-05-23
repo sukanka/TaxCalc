@@ -5,6 +5,8 @@ export type CityId = 'beijing' | 'shanghai' | 'guangzhou' | 'shenzhen' | 'hangzh
 export interface InsuranceItem {
   /** 个人缴纳比例，如 0.08 */
   rate: number;
+  /** 可调比例区间 [min, max]，省略表示固定为 rate */
+  ratioRange?: [number, number];
 }
 
 export interface SocialInsuranceConfig {

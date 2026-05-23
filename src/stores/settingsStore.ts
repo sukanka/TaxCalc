@@ -5,6 +5,7 @@ interface SettingsState {
   cityId: CityId;
   activeTab: 'monthly' | 'annual';
   housingFundRatio: number;
+  pensionRatio: number;
 }
 
 export const useSettingsStore = defineStore('settings', {
@@ -12,6 +13,7 @@ export const useSettingsStore = defineStore('settings', {
     cityId: 'beijing',
     activeTab: 'monthly',
     housingFundRatio: 0.12,
+    pensionRatio: 0.08,
   }),
   persist: {
     key: 'tax-calc-settings',
