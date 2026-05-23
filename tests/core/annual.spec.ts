@@ -85,4 +85,46 @@ describe('computeAnnualSummary', () => {
     const withTax = parseFloat(withRelief.annualSalaryTax);
     expect(withTax).toBeCloseTo(noTax * 0.5, 1);
   });
+
+  it('返回 annualBonusTax 和 annualTotalTax 字段', () => {
+    const r = computeAnnualSummary({
+      monthlyIncome: '30000',
+      annualBonus: '60000',
+      city: beijing,
+      housingFundRatio: 0.12,
+      deductions: noDeductions,
+      reliefs: [],
+    });
+    expect(r.annualBonusTax).toBeDefined();
+    expect(r.annualTotalTax).toBeDefined();
+    // 总税 = 工资税 + 年终奖税
+    const sum = parseFloat(r.annualSalaryTax) + parseFloat(r.annualBonusTax);
+    expect(parseFloat(r.annualTotalTax)).toBeCloseTo(sum, 2);
+  });
+
+  it('无年终奖时 annualBonusTax = 0', () => {
+    const r = computeAnnualSummary({
+      monthlyIncome: '30000',
+      annualBonus: '0',
+      city: beijing,
+      housingFundRatio: 0.12,
+      deductions: noDeductions,
+      reliefs: [],
+    });
+    expect(parseFloat(r.annualBonusTax)).toBe(0);
+  });
+
+  it('annualNet = annualGross − 五险一金 − annualTotalTax', () => {
+    const r = computeAnnualSummary({
+      monthlyIncome: '30000',
+      annualBonus: '60000',
+      city: beijing,
+      housingFundRatio: 0.12,
+      deductions: noDeductions,
+      reliefs: [],
+    });
+    const expected =
+      parseFloat(r.annualGross) - parseFloat(r.annualSocialInsurance) - parseFloat(r.annualTotalTax);
+    expect(parseFloat(r.annualNetIncome)).toBeCloseTo(expected, 2);
+  });
 });

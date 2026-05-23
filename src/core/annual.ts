@@ -33,6 +33,10 @@ export interface AnnualSummary {
   annualReliefDeducted: string;
   annualSalaryTaxBeforeRelief: string;
   annualSalaryTax: string;
+  /** 年终奖部分扣税（最优方案下） */
+  annualBonusTax: string;
+  /** 年度总扣税 = 工资税(含减征) + 年终奖税 */
+  annualTotalTax: string;
   annualNetIncome: string;
   bonusComparison: BonusComparison;
   socialInsurance: SocialInsuranceResult;
@@ -113,12 +117,15 @@ export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
   const taxComp = computeComprehensiveTax(salaryTI.toFixed(2));
   const annualSalaryTax = max(d(taxComp.taxBeforeRelief).sub(cumRelief), ZERO);
 
-  const annualNet = annualGross.sub(annualSI).sub(annualSalaryTax);
-
   const bonusComparison = compareBonusPlans({
     annualSalaryAfterBaseDeductions: salaryTI.toFixed(2),
     annualBonus: input.annualBonus,
   });
+
+  const annualBonusTax = max(d(bonusComparison.best.totalTax).sub(taxComp.taxBeforeRelief), ZERO);
+  const annualTotalTax = d(annualSalaryTax).add(annualBonusTax);
+
+  const annualNet = annualGross.sub(annualSI).sub(annualTotalTax);
 
   return {
     monthly,
@@ -128,6 +135,8 @@ export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
     annualReliefDeducted: fmt(cumRelief),
     annualSalaryTaxBeforeRelief: taxComp.taxBeforeRelief,
     annualSalaryTax: fmt(annualSalaryTax),
+    annualBonusTax: fmt(annualBonusTax),
+    annualTotalTax: fmt(annualTotalTax),
     annualNetIncome: fmt(annualNet),
     bonusComparison,
     socialInsurance: si,
