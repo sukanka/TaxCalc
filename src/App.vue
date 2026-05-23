@@ -31,6 +31,7 @@ watch(
     JSON.stringify(input.reliefs),
     settings.cityId,
     settings.housingFundRatio,
+    settings.pensionRatio,
   ],
   recompute,
   { deep: true }

@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { useResultStore } from '@/stores/resultStore';
 import AnimatedNumber from '../shared/AnimatedNumber.vue';
+import SocialInsuranceDetail from './SocialInsuranceDetail.vue';
 
 const result = useResultStore();
 
@@ -23,6 +24,8 @@ const lastMonth = computed(() => result.summary?.monthly[11]);
         </span>
       </div>
     </section>
+
+    <SocialInsuranceDetail />
 
     <section class="card">
       <h3 class="text-14px font-semibold text-ink mb-12px">1 月扣税明细</h3>

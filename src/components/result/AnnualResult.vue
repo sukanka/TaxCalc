@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { useResultStore } from '@/stores/resultStore';
 import AnimatedNumber from '../shared/AnimatedNumber.vue';
 import BonusComparison from './BonusComparison.vue';
+import SocialInsuranceDetail from './SocialInsuranceDetail.vue';
 
 const result = useResultStore();
 const summary = computed(() => result.summary);
@@ -36,6 +37,8 @@ const summary = computed(() => result.summary);
         ✓ 已减征：¥{{ summary.annualReliefDeducted }}
       </div>
     </section>
+
+    <SocialInsuranceDetail />
 
     <BonusComparison />
   </div>
