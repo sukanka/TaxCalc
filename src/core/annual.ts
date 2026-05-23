@@ -11,6 +11,7 @@ import type {
   DeductionsInput,
   MonthlyWithholding,
   BonusComparison,
+  BonusPlanResult,
 } from '@/types';
 
 export interface AnnualSummaryInput {
@@ -117,12 +118,51 @@ export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
   const taxComp = computeComprehensiveTax(salaryTI.toFixed(2));
   const annualSalaryTax = max(d(taxComp.taxBeforeRelief).sub(cumRelief), ZERO);
 
-  const bonusComparison = compareBonusPlans({
+  const rawComparison = compareBonusPlans({
     annualSalaryAfterBaseDeductions: salaryTI.toFixed(2),
     annualBonus: input.annualBonus,
   });
 
+  // 对每个方案的年终奖部分应用减征（共用 12 月用完后的剩余额度）
+  const policySnap = activePolicies.map(p => ({
+    policy: p,
+    accumulatedReduced: policyAccumulators.get(p.id)!,
+  }));
+  const adjustedPlans: BonusPlanResult[] = rawComparison.plans.map(plan => {
+    const bonusPart = max(d(plan.totalTax).sub(taxComp.taxBeforeRelief), ZERO);
+    if (activePolicies.length === 0 || bonusPart.lte(0)) {
+      return { ...plan, totalTaxBeforeRelief: plan.totalTax, reliefReduced: '0.00' };
+    }
+    const r = applyReliefBatch({
+      taxAmount: bonusPart.toFixed(2),
+      policies: policySnap.map(s => ({ ...s })),
+    });
+    return {
+      ...plan,
+      totalTaxBeforeRelief: plan.totalTax,
+      totalTax: fmt(d(plan.totalTax).sub(r.totalReduced)),
+      reliefReduced: r.totalReduced,
+    };
+  });
+
+  // 重新排序找 best/worst（基于减征后 totalTax）
+  const adjustedSorted = [...adjustedPlans].sort(
+    (a, b) => parseFloat(a.totalTax) - parseFloat(b.totalTax)
+  );
+  const adjustedBest = adjustedSorted[0];
+  const adjustedWorst = adjustedSorted[adjustedSorted.length - 1];
+  const adjustedSaved = d(adjustedWorst.totalTax).sub(adjustedBest.totalTax);
+
+  const bonusComparison: BonusComparison = {
+    plans: adjustedPlans,
+    best: adjustedBest,
+    worst: adjustedWorst,
+    savedVsWorst: fmt(adjustedSaved),
+    trapWarning: rawComparison.trapWarning,
+  };
+
   const annualBonusTax = max(d(bonusComparison.best.totalTax).sub(taxComp.taxBeforeRelief), ZERO);
+  const totalReliefDeducted = cumRelief.add(bonusComparison.best.reliefReduced ?? '0');
   const annualTotalTax = d(annualSalaryTax).add(annualBonusTax);
 
   const annualNet = annualGross.sub(annualSI).sub(annualTotalTax);
@@ -132,7 +172,7 @@ export function computeAnnualSummary(input: AnnualSummaryInput): AnnualSummary {
     annualGross: fmt(annualGross),
     annualSocialInsurance: fmt(annualSI),
     annualDeductions: fmt(annualDed),
-    annualReliefDeducted: fmt(cumRelief),
+    annualReliefDeducted: fmt(totalReliefDeducted),
     annualSalaryTaxBeforeRelief: taxComp.taxBeforeRelief,
     annualSalaryTax: fmt(annualSalaryTax),
     annualBonusTax: fmt(annualBonusTax),

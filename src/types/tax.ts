@@ -45,6 +45,10 @@ export interface BonusPlanResult {
   taxFromSeparate: string;
   taxFromMerge: string;
   totalTax: string;
+  /** 减征前总税（如有减征） */
+  totalTaxBeforeRelief?: string;
+  /** 该方案下年终奖部分被减征的金额 */
+  reliefReduced?: string;
 }
 
 export interface BonusComparison {

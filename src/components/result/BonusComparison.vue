@@ -100,6 +100,9 @@ watch(cmp, renderChart, { deep: true });
           ¥<AnimatedNumber :value="p.totalTax" />
         </h3>
         <p class="text-11px text-mute mt-2px">{{ p.description }}</p>
+        <p v-if="p.totalTaxBeforeRelief && p.totalTaxBeforeRelief !== p.totalTax" class="text-10px text-mute mt-2px">
+          减征前 ¥{{ p.totalTaxBeforeRelief }}
+        </p>
         <div class="mt-12px space-y-4px text-12px">
           <div class="flex justify-between">
             <span class="text-mute">单独计税部分</span>
